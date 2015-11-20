@@ -4,6 +4,8 @@ IntegCheck will be a tool for Windows systems to verify the intergrity of core W
 components as well as help identify possible malicious files. It will present feedback 
 on this information as well as visualization of the findings.
 
+This program is meant to scan the Windows directory and thus you need to run this
+program in an elevated command prompt.
 
 ====API=====
 
