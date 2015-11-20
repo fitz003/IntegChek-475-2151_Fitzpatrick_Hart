@@ -1,1 +1,105 @@
-IntegCheck will be a tool for Windows systems to verify the intergrity of core Windows components as well as help identify possible malicious files. It will present feedback on this information as well as visualization of the findings
+====OVERVIEW====
+
+IntegCheck will be a tool for Windows systems to verify the intergrity of core Windows 
+components as well as help identify possible malicious files. It will present feedback 
+on this information as well as visualization of the findings.
+
+
+====API=====
+
+General Information
+---------------------
+
+We use Metascan from OPSWAT (https://www.metascan-online.com) to verify our file hashes.
+We have 4 main variables that are required to be able to use their API service.
+
+
+How to get an API Key
+---------------------
+
+1. Create an account here: https://myportal.opswat.com/
+
+2. Request an API Key
+
+3. Copy and paste your API Key into the code
+
+4. It Works!
+
+
+The Variables
+---------------
+
+#Metascan API key
+global glob_apiKey
+
+#Metascan API hash lookup URL
+global glob_hashUrl
+
+#Metascan API hash/file result URL
+global glob_hashResultUrl
+
+#Metascan API file scan upload URL
+global glob_upUrl
+
+
+EXAMPLE CODE:
+--------------
+
+glob_apiKey = 'xxxxYOUR KEY HERExxxxx'        
+glob_hashUrl = 'https://hashlookup.metascan-online.com/v2/hash/'
+glob_hashResultUrl = 'https://metascan-online.com/en/scanresult/file/'  
+glob_upUrl = 'https://scan.metascan-online.com/v2/file'  
+
+ERORRS
+-------------
+
+Hourly Limit Error
+------------------
+
+"Oh no! You've reached your API key limit!"
+HTTP 403 = The hourly has lookup limit has been reached for your API Key.
+
+
+====IntegChecker.py====
+
+General Information
+--------------------
+
+This file contains the main code for the Windows Integrity Checker program.
+
+Steps
+-----
+
+1. User types in their Windows directory with the -d flag
+2. User types in the name of the error file with the -o flag
+3. The program opens the windows directory and begins hashing files with an extension
+   of .exe, .dll, or .ini. 
+4. After a single file is found, it is hashed and the hash is sent to metascan
+5. Metascan sends back a response on whether or no the file is safe
+6. If the file hash is not found in the database, it will print out the file to the 
+   error log. 
+7. If the hash is clean, it will go to the clean log.
+8. If infected or suspicious files are found, you can find the names in their respective
+   logs.
+9. Once the program has completed, you can open the index.html file to see your results!
+
+File Key
+---------
+
+Clean - No threat detection or the file is empty.
+Suspicious - Classified as a possible threat but not identified as a specific threat.
+Infected - A threat has been found.
+
+====Visual====
+
+
+General Information
+-------------------
+
+The visual folder contains files that help create the visual for the Integrity checker
+tool. You can view the results after running the tool by opening the index.html file
+in your web browser.
+
+
+
+
